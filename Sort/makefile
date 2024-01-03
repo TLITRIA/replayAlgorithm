@@ -14,9 +14,9 @@ selectSort.o:selectSort.c
 
 # 快速
 quickSort:quickSort.o
-	gcc quickSort.o -o quickSort
+	gcc -g quickSort.o -o quickSort
 quickSort.o:quickSort.c
-	gcc -c quickSort.c -o quickSort.o
+	gcc -g -c quickSort.c -o quickSort.o 
 
 # 二分
 

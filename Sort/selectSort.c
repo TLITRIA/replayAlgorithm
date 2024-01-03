@@ -1,17 +1,8 @@
 #include <stdio.h>
+#include "common.h"
 
 /* 相较于冒泡排序减少了交换次数 */
 /* 时间复杂度为O(n) */
-
-int printArray(int *array, int length)
-{
-    int ret = 0;
-    for (int idx = 0; idx < length; idx++)
-    {
-        printf("array[%d]:%d\n", idx, array[idx]);
-    }
-    return ret;
-}
 
 int selectSort(int *array, int length)
 {
@@ -42,12 +33,12 @@ int selectSort(int *array, int length)
 
 int main()
 {
-    int array[] = {54, 78, 100, 89, 127, 128};
-    int length = sizeof(array) / sizeof(array[0]);
+    int *array = arrayInit();
+    JUDGE_MALLOC_ERROR(array);
 
-    selectSort(array, length);
+    selectSort(array, DEFAULT_SIZE);
     
-    printArray(array, length);
+    printArray(array, DEFAULT_SIZE);
     return 0;
 }
 

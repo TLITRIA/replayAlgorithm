@@ -1,46 +1,73 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-
-#define DEFAULT_SIZE 10
+#include "common.h"
 
 /* 相较于冒泡排序减少了交换次数 */
 /* 时间复杂度为O(n) */
 
-int *arrayInit()
+int quickSort(int *array, int start, int end)
 {
-    int ret = 0;
-    int *array = malloc(sizeof(int) * DEFAULT_SIZE);
-    if (array == NULL)
+    if (start > end) /* 退出判定 */
     {
-        return NULL;
+        return ON_SUCCESS;
     }
-    memset(array, 0, sizeof(int) * DEFAULT_SIZE);
+    
+    int left = start;
+    int right = end;
+    int baseValue = array[left];
+    
+    
+    while (left < right)
+    {
+        /* 左索引固定，从右向左找比base小的值 */
+        while (left < right && baseValue <= array[right])
+        {
+            right--;
+        }
+        /* 2(base) 3 5 1(right) 5 */
+        array[left] = array[right];
+        array[right] = baseValue;
+        /* 右索引固定，从左向右找比base大的值 */
+        while (left < right && baseValue >= array[left])
+        {
+            left++;
+        }
+        array[right] = array[left];
+        array[left] = baseValue;
+    }
+    
+    quickSort(array, start, left - 1);
+    quickSort(array, left + 1, end);
 
-    for (int idx = 0; idx < DEFAULT_SIZE; idx++)
-    {
-        array[idx] = rand()%100 + 1;
-    }
-    return array;
+    return ON_SUCCESS;
 }
-
-int printArray(int *array, int length)
-{
-    int ret = 0;
-    for (int idx = 0; idx < length; idx++)
-    {
-        printf("array[%d]:%d\n", idx, array[idx]);
-    }
-    return ret;
-}
-
 
 
 int main()
 {
     int *array = arrayInit();
+    JUDGE_MALLOC_ERROR(array);
+    quickSort(array, 0, DEFAULT_SIZE - 1);
+
+
+
+
     printArray(array, DEFAULT_SIZE);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     return 0;

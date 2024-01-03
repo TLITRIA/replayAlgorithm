@@ -1,17 +1,9 @@
 #include <stdio.h>
+#include "common.h"
 
 
-int printArray(int *array, int length)
-{
-    int ret = 0;
-    for (int idx = 0; idx < length; idx++)
-    {
-        printf("array[%d]:%d\n", idx, array[idx]);
-    }
-    return ret;
-}
 
-int insertSort(int *array, int length)
+int inserctSort(int *array, int length)
 {
     int ret = 0;
     int num = 0;
@@ -34,7 +26,7 @@ int insertSort(int *array, int length)
     return 0;
 }
 
-int insertSort02(int *array, int length)
+int inserctSort02(int *array, int length)
 {
     int ret = 0;
     int cur = 0;
@@ -56,8 +48,9 @@ int insertSort02(int *array, int length)
 
 int main()
 {
-    int array[] = {54, 78, 100, 89, 127, 128};
-    int length = sizeof(array) / sizeof(array[0]);
+    // int array[] = {54, 78, 100, 89, 127, 128};
+    // int length = sizeof(array) / sizeof(array[0]);
+    int *array = arrayInit();
 #if 0
     int num = 0;
     for (int pos = 1; pos < length; pos++)
@@ -78,13 +71,13 @@ int main()
         }
     }
 #else
-    insertSort02(array, length);
+    inserctSort02(array, DEFAULT_SIZE);
 #endif
 
 
 
 
-    printArray(array, length);
+    printArray(array, DEFAULT_SIZE);
 
 
 
