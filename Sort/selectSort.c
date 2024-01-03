@@ -1,46 +1,54 @@
 #include <stdio.h>
 
-#define BUFFER_SIZE 10
+/* 相较于冒泡排序减少了交换次数 */
+/* 时间复杂度为O(n) */
 
-#define PRINT(buffer)\
-for (int idx = 0; idx < BUFFER_SIZE; idx++)\
-    {\
-        printf("%d\t", buffer[idx]);\
-    }\
-    printf("\n");\
+int printArray(int *array, int length)
+{
+    int ret = 0;
+    for (int idx = 0; idx < length; idx++)
+    {
+        printf("array[%d]:%d\n", idx, array[idx]);
+    }
+    return ret;
+}
+
+int selectSort(int *array, int length)
+{
+    int ret = 0;
+    int minValue = 0;
+    int minIndex = 0;
+
+    for (int pos = 0; pos < length; pos++)
+    {
+        minValue = array[pos];
+        for (int begin = pos + 1; begin < length; begin++)
+        {
+            if (minValue > array[begin])
+            {
+                minValue = array[begin];
+                minIndex = begin;
+            }
+        }
+
+        if (array[pos] > minValue)
+        {
+            array[minIndex] = array[pos];
+            array[pos] = minValue;
+        }
+    }
+    return ret;
+}
 
 int main()
 {
-    int buffer[BUFFER_SIZE] = {61, 12, 44, 25, 3, 15, 11, 38, 20, 14};
+    int array[] = {54, 78, 100, 89, 127, 128};
+    int length = sizeof(array) / sizeof(array[0]);
 
-
-
-    int pos = 0;
-    int minPos = 0;
-    int tmpNum = 0;
-    for (pos = 0; pos < BUFFER_SIZE - 1; pos++)
-    {
-        minPos = pos + 1;
-        for (int idx = pos + 1; idx < BUFFER_SIZE; idx++)
-        {
-            if (buffer[minPos] > buffer[idx])
-            {
-                minPos = idx;
-            }
-        }
-        if (buffer[pos] > buffer[minPos])
-        {
-            tmpNum = buffer[minPos];
-            buffer[minPos] = buffer[pos];
-            buffer[pos] = tmpNum;
-        }
-        // PRINT(buffer);
-    }
-
-
-
-
-
-
+    selectSort(array, length);
+    
+    printArray(array, length);
     return 0;
 }
+
+
