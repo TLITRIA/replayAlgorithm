@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include "common.h"
 
-/* 相较于冒泡排序减少了交换次数 */
-/* 时间复杂度为O(n) */
 
+/*  */
 int quickSort(int *array, int start, int end)
 {
     if (start > end) /* 退出判定 */
@@ -15,7 +14,7 @@ int quickSort(int *array, int start, int end)
     int right = end;
     int baseValue = array[left];
     
-    
+    /* 将所有大于base的值移到右边 将所有小于base的值移到左边 */
     while (left < right)
     {
         /* 左索引固定，从右向左找比base小的值 */
