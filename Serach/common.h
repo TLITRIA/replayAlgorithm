@@ -25,6 +25,7 @@ if (ptr == NULL)\
 
 int *arrayInit()
 {
+    srand((unsigned int)time(NULL));
     int ret = 0;
     int *array = (int *)malloc(sizeof(int) * DEFAULT_SIZE);
     if (array == NULL)
