@@ -1,6 +1,44 @@
 #include <stdio.h>
 
+/* 相较于冒泡排序减少了交换次数 */
+/* 时间复杂度为O(n) */
 
+int printArray(int *array, int length)
+{
+    int ret = 0;
+    for (int idx = 0; idx < length; idx++)
+    {
+        printf("array[%d]:%d\n", idx, array[idx]);
+    }
+    return ret;
+}
+
+int selectSort(int *array, int length)
+{
+    int ret = 0;
+    int minValue = 0;
+    int minIndex = 0;
+
+    for (int pos = 0; pos < length; pos++)
+    {
+        minValue = array[pos];
+        for (int begin = pos + 1; begin < length; begin++)
+        {
+            if (minValue > array[begin])
+            {
+                minValue = array[begin];
+                minIndex = begin;
+            }
+        }
+
+        if (array[pos] > minValue)
+        {
+            array[minIndex] = array[pos];
+            array[pos] = minValue;
+        }
+    }
+    return ret;
+}
 
 int main()
 {
@@ -10,30 +48,9 @@ int main()
     int min = array[0];
     int minIndex = 0;
 
-    for (int pos = 0; pos < length; pos++)
-    {
-        min = array[pos];
-        for (int begin = pos + 1; begin < length; begin++)
-        {
-            if (min > array[begin])
-            {
-                min = array[begin];
-                minIndex = begin;
-            }
-        }
-
-        if (array[pos] > min)
-        {
-            array[minIndex] = array[pos];
-            array[pos] = min;
-        }
-    }
+    selectSort(array, length);
     
-
-    for (int idx = 0; idx < length; idx++)
-    {
-        printf("%d\n", array[idx]);
-    }
+    printArray(array, length);
     return 0;
 }
 
